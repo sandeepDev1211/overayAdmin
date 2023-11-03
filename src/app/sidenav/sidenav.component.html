@@ -1,18 +1,148 @@
 <mat-nav-list>
-    <div class="logo py-4">
-      <img src="./assets/logo.svg" alt="Company Logo" />
-    </div>
-    <mat-divider></mat-divider>
-    <h2 matSubheader class="mt-2">APPLICATIONS</h2>
-  
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/home">
-      <mat-icon>home</mat-icon> Home
+  <div class="logo py-4">
+    <img src="./assets/logo.webp" alt="Company Logo" />
+  </div>
+  <mat-divider></mat-divider>
+  <mat-expansion-panel disabled hideToggle>
+    <mat-expansion-panel-header>
+      <a
+        mat-list-item
+        class="{{ isActive('dashboard') }} first-level-list"
+        (click)="navigateToURL('dashboard')"
+      >
+        <mat-icon>dashboard</mat-icon> Dashboard
+      </a>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="isExpanded('products')" hideToggle>
+    <mat-expansion-panel-header class="submenu">
+      <a
+        mat-list-item
+        class="{{ isActive('products') }} second-level-list"
+        (click)="navigateToURL('products')"
+      >
+        <mat-icon>interests</mat-icon> Products
+      </a>
+    </mat-expansion-panel-header>
+    <a
+      mat-list-item
+      class="{{ isActive('products') }} second-level-list"
+      (click)="navigateToURL('products')"
+    >
+      Products
     </a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
-      <mat-icon>dashboard</mat-icon> Dashboard
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="isExpanded('categories')" hideToggle>
+    <mat-expansion-panel-header class="submenu">
+      <a
+        mat-list-item
+        class="{{ isActive('categories') }} second-level-list"
+        (click)="navigateToURL('categories')"
+      >
+        <mat-icon>schema</mat-icon> Categories
+      </a>
+    </mat-expansion-panel-header>
+    <a
+      mat-list-item
+      class="{{ isActive('categories') }} second-level-list"
+      (click)="navigateToURL('Categories')"
+    >
+      Categories
     </a>
-    <a mat-list-item> <mat-icon>edit</mat-icon> Link 3 </a>
-    <a mat-list-item> <mat-icon>edit</mat-icon> Link 4 </a>
-    <a mat-list-item> <mat-icon>edit</mat-icon> Link 5 </a>
-    <a mat-list-item> <mat-icon>edit</mat-icon> Link 6 </a>
-  </mat-nav-list>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="isExpanded('coupons')" hideToggle>
+    <mat-expansion-panel-header class="submenu">
+      <a
+        mat-list-item
+        class="{{ isActive('coupons') }} second-level-list"
+        (click)="navigateToURL('coupons')"
+      >
+        <mat-icon>loyalty</mat-icon> Coupons
+      </a>
+    </mat-expansion-panel-header>
+    <a
+      mat-list-item
+      class="{{ isActive('coupons') }} second-level-list"
+      (click)="navigateToURL('coupons')"
+    >
+      Coupons
+    </a>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="isExpanded('orders')" hideToggle>
+    <mat-expansion-panel-header class="submenu">
+      <a
+        mat-list-item
+        class="{{ isActive('orders') }} second-level-list"
+        (click)="navigateToURL('orders')"
+      >
+        <mat-icon>shopping</mat-icon> Orders
+      </a>
+    </mat-expansion-panel-header>
+    <a
+      mat-list-item
+      class="{{ isActive('orders') }} second-level-list"
+      (click)="navigateToURL('orders')"
+    >
+      Orders
+    </a>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel disabled hideToggle>
+    <mat-expansion-panel-header>
+      <a
+        mat-list-item
+        class="{{ isActive('users') }} first-level-list"
+        (click)="navigateToURL('users')"
+      >
+        <mat-icon>groups</mat-icon> Users
+      </a>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel disabled hideToggle>
+    <mat-expansion-panel-header>
+      <a
+        mat-list-item
+        class="{{ isActive('home-settings') }} first-level-list"
+        (click)="navigateToURL('home-settings')"
+      >
+        <mat-icon>widgets</mat-icon> Home Page Widgets
+      </a>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="isExpanded('settings')" hideToggle>
+    <mat-expansion-panel-header class="submenu">
+      <a
+        mat-list-item
+        class="{{ isActive('settings') }} second-level-list"
+        (click)="navigateToURL('settings')"
+      >
+        <mat-icon>settings</mat-icon> Settings
+      </a>
+    </mat-expansion-panel-header>
+    <a
+      mat-list-item
+      class="{{ isActive('settings') }} second-level-list"
+      (click)="navigateToURL('settings')"
+    >
+      Settings
+    </a>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel disabled hideToggle>
+    <mat-expansion-panel-header>
+      <a
+        mat-list-item
+        routerLinkActive="list-item--active"
+        (click)="emitlogout()"
+      >
+        <mat-icon>logout</mat-icon> Logout
+      </a>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+</mat-nav-list>

@@ -20,33 +20,30 @@
     font-size: 0.8rem;
     height: 44px !important;
     margin-bottom: 4px;
-    &:hover {
-      color: #f2f5f7 !important;
-    }
+    // &:hover {
+    //   color: #f2f5f7 !important;
+    // }
     ::ng-deep {
       .mat-list-item-content {
         border-radius: 5px;
         margin: 0 8px;
-        &:hover {
-          background: #2c3344 !important;
-        }
+        // &:hover {
+        //   background: #2c3344 !important;
+        // }
       }
     }
   }
   .list-item-active {
-    // background: blue !important;
-    // border-radius: 0 2rem 2rem 0;
-    // &:hover {
-    //   background: blue;
-    // }
-  
     color: #f2f5f7 !important;
     ::ng-deep {
+      .mdc-list-item__primary-text{
+        color: #fff;
+      }
       .mat-list-item-content {
         background: #2c3344 !important;
-        &:hover {
-          background: #2c3344 !important;
-        }
+        // &:hover {
+        //   background: #2c3344 !important;
+        // }
       }
     }
   }
@@ -56,3 +53,49 @@
     font-weight: 100;
     letter-spacing: 1px;
   }
+    :host ::ng-deep {
+      .mdc-list-item__primary-text {
+        color: #fff;
+      }
+      .list-item-active{
+        background: #2c3344;
+      }
+    }
+    a {
+  color: white !important;
+}
+:host ::ng-deep {
+  .mat-expansion-panel-header{
+      padding: 0px;
+      &.submenu{
+    // padding: 0 16px;
+      }
+            .mat-expansion-panel-header:not([aria-disabled=true]){
+              margin-right: 8px;
+            }
+      .mat-content.mat-content-hide-toggle{
+        margin-right: 0px;
+      }
+  }
+ mat-expansion-panel,.mat-expansion-panel:not([class*=mat-elevation-z]),
+ .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover{
+  background: #d58121;
+  color:#fff;
+  box-shadow: none;
+  border-radius: 0px;
+// &:hover {
+//     background: rgba(34, 34, 34, .22);
+//     color: #2c3344;
+//   }
+  span::after{
+    color: #fff;
+  }
+}
+}
+    .list-item-active {
+      background: #2c3344;
+    }
+
+    .active{
+      background: rgba(34,34,34,.22);
+    }

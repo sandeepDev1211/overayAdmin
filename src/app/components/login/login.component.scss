@@ -1,0 +1,14 @@
+.logincard-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    .logincard{
+        max-width: 400px;
+        mat-form-field{
+            width: 100%;
+        }
+    }
+    mat-card-content{
+        margin-bottom: 10px;
+    }
+}
