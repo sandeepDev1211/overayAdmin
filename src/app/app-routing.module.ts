@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TableComponent } from './components/table/table.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'admin-login', pathMatch: 'full' },
@@ -59,6 +60,9 @@ const routes: Routes = [
       import('./components/settings/settings.module').then(
         (m) => m.SettingsModule
       ),
+  },
+  {
+    path: 'table',component:TableComponent
   },
 ];
 
