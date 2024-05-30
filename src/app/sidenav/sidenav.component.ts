@@ -20,7 +20,7 @@ export class SidenavComponent {
         this.activeRoute = event.url;
         console.log(this.activeRoute);
       }
-    });
+    }); 
   }
   activeRoute = 'dashboard';
   @Output() url = new EventEmitter<string>();
