@@ -1,0 +1,11 @@
+.category-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    .categoryCenter{
+        max-width: 400px;
+        mat-form-field{
+            width: 100%;
+        }
+    }
+}

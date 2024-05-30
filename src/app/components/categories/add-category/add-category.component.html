@@ -1,0 +1,31 @@
+<div class="category-container">
+  <div class="categoryCenter">
+    <form [formGroup]="categoryForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Category Type</mat-label>
+        <input matInput placeholder="Type" formControlName="type" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name" />
+      </mat-form-field>
+
+      <button
+        *ngIf="!isUpdateActive"
+        (click)="Save()"
+        mat-raised-button
+        color="accent"
+      >
+        Save
+      </button>
+      <button
+        *ngIf="isUpdateActive"
+        (click)="update()"
+        mat-raised-button
+        color="accent"
+      >
+        Update
+      </button>
+    </form>
+  </div>
+</div>
