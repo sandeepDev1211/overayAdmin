@@ -1,20 +1,24 @@
 {
-  "posts": [
+  "categories": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "type": "Trackpant",
+      "name": "Men",
+      "id": 1
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "type": "Suit",
+      "name": "Women",
+      "id": 2
+    },
+    {
+      "type": "Kids",
+      "name": "Frock",
+      "id": 3
+    },
+    {
+      "type": "Abc",
+      "name": "Shorts",
+      "id": 4
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  },
-  "products":[]
+  ]
 }

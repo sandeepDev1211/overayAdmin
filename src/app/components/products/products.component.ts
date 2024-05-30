@@ -1,13 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AddProductComponent } from './add-product/add-product.component';
-import { ProductServiceService } from './product-service.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { CoreService } from 'src/app/util/core-service.service';
-import { MatIconModule } from '@angular/material/icon';
-
+import { Router } from '@angular/router';
+import { ProductService } from './product.service';
+import { NgConfirmService } from 'ng-confirm-box';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -16,79 +12,43 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ProductsComponent {
 
-  displayedColumns: string[] = [
-    'id',
-    'productName',
-    'lastName',
-    'action',
-  ];
   dataSource!: MatTableDataSource<any>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  displayedColumns: string[] = ['productName', 'desc', 'price', 'rating','discount','totalQuantity','categoryID','subCategoryID'];
 
   constructor(
-    private _dialog: MatDialog,
-    private _productService: ProductServiceService,
-    private _coreService: CoreService
+    private router: Router,
+    private categoryService: ProductService,
+    private confirmService: NgConfirmService,
+    private toastr: ToastrService
   ) {}
 
-  ngOnInit(): void {
-    this.getProductList();
+  ngOnInit() {
+    this.getProducts();
   }
 
-  openProductForm() {
-    const dialogRef = this._dialog.open(AddProductComponent);
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if (val) {
-          this.getProductList();
-        }
-      },
-    });
+  addProduct() {
+    this.router.navigate(['/categories/add-product']);
   }
 
-  getProductList() {
-    this._productService.getProductList().subscribe({
+  editProduct(id: number) {
+    this.router.navigate(['/categories/edit-product', id]);
+  }
+
+  getProducts() {
+    this.categoryService.getProduct().subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
       },
-      error: console.log,
+      error: (err) => {
+        console.log(err);
+      },
     });
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   deleteProduct(id: number) {
-    this._productService.deleteProduct(id).subscribe({
-      next: (res) => {
-        this._coreService.openSnackBar('Product deleted!', 'done');
-        this.getProductList();
-      },
-      error: console.log,
-    });
-  }
-
-  openEditProductForm(data: any) {
-    const dialogRef = this._dialog.open(AddProductComponent, {
-      data,
-    });
-
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if (val) {
-          this.getProductList();
-        }
-      },
+    this.categoryService.deleteProduct(id).subscribe((res) => {
+      this.toastr.success('Category Deleted Successfully');
+      this.getProducts();
     });
   }
 

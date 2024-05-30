@@ -1,26 +1,59 @@
-<div mat-dialog-title>
-    <h1>Add Product</h1>
-</div>
-<form [formGroup]="productForm" (ngSubmit)="onFormSubmit()">
-    <div mat-dialog-content class="content">
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Product name</mat-label>
-                <input matInput type="text" placeholder="Product Name" formControlName="productName">
-            </mat-form-field>
-        </div>
-
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Category</mat-label>
-                <input matInput type="text" placeholder="Add Category" formControlName="category">
-            </mat-form-field>
-        </div>
-
+<div class="product-container">
+    <div class="productCenter">
+      <form [formGroup]="ProductForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Product Type</mat-label>
+          <input matInput placeholder="Type" formControlName="type" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Product Name</mat-label>
+          <input matInput placeholder="Product Name" formControlName="productName" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Description" formControlName="desc" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="Price" formControlName="price" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Rating</mat-label>
+            <input matInput placeholder="Rating" formControlName="rating" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Discount</mat-label>
+            <input matInput placeholder="Discount" formControlName="discount" />
+          </mat-form-field>
+                  <mat-form-field appearance="fill">
+            <mat-label>Total Quantity</mat-label>
+            <input matInput placeholder="Total Quantity" formControlName="totalQuantity" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>CategoryID</mat-label>
+            <input matInput placeholder="CategoryID" formControlName="categoryID" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>SubCategoryID</mat-label>
+            <input matInput placeholder="SubCategoryID" formControlName="subCategoryID" />
+          </mat-form-field>
+  
+        <button
+          *ngIf="!isUpdateActive"
+          (click)="SaveProduct()"
+          mat-raised-button
+          color="accent"
+        >
+          Save
+        </button>
+        <button
+          *ngIf="isUpdateActive"
+          (click)="update()"
+          mat-raised-button
+          color="accent"
+        >
+          Update
+        </button>
+      </form>
     </div>
-    <div mat-dialog-actions class="action">
-        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-        <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
-    </div>
-</form>
-
+  </div>

@@ -1,0 +1,37 @@
+<div class="sub-category-container">
+  <div class="categoryCenter">
+    <form [formGroup]="subcategoryForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Sub Category Type</mat-label>
+        <input matInput placeholder="Type" formControlName="type" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Category ID</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let category of categories" [value]="category?.id">
+            {{ category?.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="fetchCategoryId(userId)"
+      >
+        Save
+      </button>
+      <!-- <button
+
+          mat-raised-button
+          color="accent"
+        >
+          Update
+        </button> -->
+    </form>
+  </div>
+</div>

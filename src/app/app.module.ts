@@ -21,6 +21,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { TableComponent } from './components/table/table.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { ToastrModule } from 'ngx-toastr';
+import { NgConfirmModule } from 'ng-confirm-box';
 
 @NgModule({
   declarations: [
@@ -29,6 +36,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     HomeComponent,
     SidenavComponent,
     MessageDialogComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +55,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatButtonModule,
     MatDialogModule,
     MatExpansionModule,
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    NgConfirmModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
