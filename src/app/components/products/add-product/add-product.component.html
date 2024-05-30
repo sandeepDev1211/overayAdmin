@@ -1,0 +1,59 @@
+<div class="product-container">
+    <div class="productCenter">
+      <form [formGroup]="ProductForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Product Type</mat-label>
+          <input matInput placeholder="Type" formControlName="type" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Product Name</mat-label>
+          <input matInput placeholder="Product Name" formControlName="productName" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Description" formControlName="desc" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="Price" formControlName="price" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Rating</mat-label>
+            <input matInput placeholder="Rating" formControlName="rating" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Discount</mat-label>
+            <input matInput placeholder="Discount" formControlName="discount" />
+          </mat-form-field>
+                  <mat-form-field appearance="fill">
+            <mat-label>Total Quantity</mat-label>
+            <input matInput placeholder="Total Quantity" formControlName="totalQuantity" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>CategoryID</mat-label>
+            <input matInput placeholder="CategoryID" formControlName="categoryID" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>SubCategoryID</mat-label>
+            <input matInput placeholder="SubCategoryID" formControlName="subCategoryID" />
+          </mat-form-field>
+  
+        <button
+          *ngIf="!isUpdateActive"
+          (click)="SaveProduct()"
+          mat-raised-button
+          color="accent"
+        >
+          Save
+        </button>
+        <button
+          *ngIf="isUpdateActive"
+          (click)="update()"
+          mat-raised-button
+          color="accent"
+        >
+          Update
+        </button>
+      </form>
+    </div>
+  </div>
