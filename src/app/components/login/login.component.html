@@ -10,17 +10,22 @@
       </div>
       <mat-divider></mat-divider>
       <div layout="column" layout-padding>
-        <form name="lgnform" [formGroup]="loginForm">
+
+
+
+        <form (ngSubmit)="onSubmit()">
           <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
             <input
+            [(ngModel)]="credentials.email"
+              required
+              name="email"
               type="email"
               matInput
-              formControlName="email"
               placeholder="Ex. pat@example.com"
             />
 
-            <mat-error
+            <!-- <mat-error
               *ngIf="
                 loginForm.get('email')?.invalid &&
                 (loginForm.get('email')?.dirty ||
@@ -28,19 +33,23 @@
               "
             >
               Enter a valid email
-            </mat-error>
+            </mat-error> -->
+
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>Password</mat-label>
             <input
+            [(ngModel)]="credentials.password"
+            required
+            name="password"
               type="password"
               matInput
-              formControlName="password"
+
               placeholder="password"
             />
 
-            <mat-error
+            <!-- <mat-error
               *ngIf="
                 loginForm.get('password')?.invalid &&
                 (loginForm.get('password')?.dirty ||
@@ -48,13 +57,18 @@
               "
             >
               password is <strong>required</strong>
-            </mat-error>
+            </mat-error> -->
+
           </mat-form-field>
 
-          <button mat-raised-button color="primary" (click)="login()">
+          <button mat-raised-button color="primary" (click)="onSubmit()">
             Login
           </button>
         </form>
+<br/>
+
+{{credentials | json}}
+
       </div>
     </mat-card-content>
     <mat-card-footer>
