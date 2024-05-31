@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CategoryService {
+  
   constructor(private http: HttpClient) {}
 
   postCategory(categories: any) {

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class LoginServiceService {
 
-url="https://overay.therohankumar.com/v1/auth/login"
+url="http://localhost:5000/v1/auth/login"
 
   constructor(private http:HttpClient) { }
 

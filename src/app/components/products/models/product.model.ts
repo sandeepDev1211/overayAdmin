@@ -1,10 +1,8 @@
 export class Product {
-    productName!: string;
-    desc!: string;
+    name!: string;
+    code!: string;
     price!:number;
-    rating!:number;
     discount!:number;
-    totalQuantity!:number;
-    categoryID!:number;
-    subCategoryID!:number;
+    category!:string;
+   
   }
