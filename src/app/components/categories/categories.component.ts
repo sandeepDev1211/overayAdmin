@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CategoriesComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['id','name','description', 'action'];
+  displayedColumns: string[] = ['name','description', 'action'];
 
   constructor(
     private router: Router,

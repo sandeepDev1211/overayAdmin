@@ -26,8 +26,8 @@ export class AddCategoryComponent {
 
   ngOnInit(): void {
     this.categoryForm = this.formBuilder.group({
-      description: ['', Validators.required],
       name: ['', Validators.required],
+      description: ['', Validators.required],
     });
 
     this.activatedRoute.params.subscribe((val) => {

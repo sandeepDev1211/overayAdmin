@@ -1,16 +1,16 @@
-<div class="category-container">
+  <div class="category-container">
   <div class="categoryCenter">
     <form [formGroup]="categoryForm">
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput placeholder="Type" formControlName="name" />
+        <input matInput placeholder="name" formControlName="name" />
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>
-        <input matInput placeholder="Name" formControlName="description" />
+        <input matInput placeholder="description" formControlName="description" />
       </mat-form-field>
-
-      <button
+      
+       <button
         *ngIf="!isUpdateActive"
         (click)="Save()"
         mat-raised-button
