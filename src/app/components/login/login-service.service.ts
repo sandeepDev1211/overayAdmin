@@ -12,33 +12,60 @@ url="https://overay.therohankumar.com/v1/auth/login"
 
   generateToken(credentials:any){
 
-    return this.http.post(`${this.url}/token`,credentials)
+    return this.http.post(`${this.url}`,credentials)
 
   }
 
 
-loginUser(token: string){
-localStorage.setItem('token',token)
-return true
-}
+  // storeToken(tokenValue: string){
+  //   localStorage.setItem('token', tokenValue)
+  // }
 
-isLoggedIn(){
-  let token = localStorage.getItem('token');
-  if(token == undefined || token === '' || token==null){
-return false
-  }else{
+
+  loginUser(token: string){
+    localStorage.setItem('token',token)
     return true
+    }
+
+  getToken(){
+    return localStorage.getItem('token')
   }
-}
 
-logout(){
-  localStorage.removeItem('token')
-  return true
-}
+  isLoggedIn(): boolean{
+    return !!localStorage.getItem('token')
+  }
 
-getToken(){
-  return localStorage.getItem('token')
-}
+
+
+
+
+
+
+
+
+
+// loginUser(token: string){
+// localStorage.setItem('token',token)
+// return true
+// }
+
+// isLoggedIn(){
+//   let token = localStorage.getItem('token');
+//   if(token == undefined || token === '' || token==null){
+// return false
+//   }else{
+//     return true
+//   }
+// }
+
+// logout(){
+//   localStorage.removeItem('token')
+//   return true
+// }
+
+// getToken(){
+//   return localStorage.getItem('token')
+// }
 
 
 }

@@ -1,89 +1,80 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+// import ValidateForm from 'src/app/message-dialog/validateForm';
 import { HelperService } from 'src/app/util/helper.service';
 import { LoginServiceService } from './login-service.service';
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit{
-
-credentials={
-  email: '',
-  password: ''
-} 
-  router: any;
-
-constructor(private loginService:LoginServiceService){}
-
-ngOnInit(): void {
-  
-}
-  // loginForm!: FormGroup;
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
   isLoading = false;
+  constructor(private helperService: HelperService, private router: Router,private fb: FormBuilder,private login:LoginServiceService) {
 
-  // constructor(private helperService: HelperService, private router: Router) {
-  //   this.helperService.isLoading.subscribe((isLoading: boolean) => {
-  //     this.isLoading = isLoading;
-  //   });
-  //   this.loginForm = new FormGroup({
-  //     email: new FormControl('', [Validators.required, Validators.email]),
-  //     password: new FormControl('', [Validators.required]),
-  //   });
-  // }
-
-  // generateToken(credentials:any){
-
-  //   return this.http.post(`${this.url}/token`,credentials)
-
-  // }
+    this.helperService.isLoading.subscribe((isLoading: boolean) => {
+      this.isLoading = isLoading;
+    });
+  }
 
 
-  onSubmit(){
-   console.log('form is submitted');
-  if((this.credentials.email!='' && this.credentials.password!='') &&(this.credentials.email!=null && this.credentials.password!=null)){
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
 
-  this.loginService.generateToken(this.credentials).subscribe(
-    (response:any)=>{
+  onLogin() {
+
+    if (this.loginForm.valid) {
+
+
+console.log(this.loginForm.value);
+
+
+
+this.login.generateToken(this.loginForm.value).subscribe(
+  (response:any)=>{
 console.log(response);
-this.loginService.loginUser(response.token)
-this.router.navigateByUrl('/dashboard');
-
-    },
-    error=>{
+this.login.loginUser(response.token)
+// this.router.navigateByUrl('/dashboard');
+window.location.href="/dashboard"
+  },
+  error=>{
 console.log(error);
 
-    }
-    )
-    
-    
-
-  }else{
-    console.log('Fields are empty');
-    
   }
+  )
+  
+  
 
-  }
-
-
-
-  // login() {
-  //   this.helperService.openLoader(true);
-  //   setTimeout(() => {
-  //     this.helperService.openLoader();
-
-  //     this.helperService.openMessageDialog(
-  //       true,
-  //       'Success',
-  //       'Logged In Successfully'
-  //     );
-  //     setTimeout(() => {
-  //       this.helperService.closeDialog();
-  //       this.router.navigateByUrl('/dashboard');
-  //     }, 3000);
-  //   }, 2000);
-  // }
+}else{
+  console.log('Fields are empty');
+  
 }
+
+
+    }
+
+
+
+    // this.helperService.openLoader(true);
+    // setTimeout(() => {
+    //   this.helperService.openLoader();
+
+    //   this.helperService.openMessageDialog(
+    //     true,
+    //     'Success',
+    //     'Logged In Successfully'
+    //   );
+    //   setTimeout(() => {
+    //     this.helperService.closeDialog();
+    //     this.router.navigateByUrl('/dashboard');
+    //   }, 3000);
+    // }, 2000);
+  }

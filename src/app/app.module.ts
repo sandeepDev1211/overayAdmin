@@ -22,12 +22,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { TableComponent } from './components/table/table.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ToastrModule } from 'ngx-toastr';
 import { NgConfirmModule } from 'ng-confirm-box';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,11 @@ import { NgConfirmModule } from 'ng-confirm-box';
     NgConfirmModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

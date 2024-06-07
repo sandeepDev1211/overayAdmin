@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoriesComponent } from './categories.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
-import { AddSubCategoryComponent } from './add-sub-category/add-sub-category.component';
 
 const routes: Routes = [
   {
@@ -20,10 +19,6 @@ const routes: Routes = [
   {
     path: 'view-category/:id',
     component: AddCategoryComponent,
-  },
-    {
-    path: 'add-sub-category',
-    component: AddSubCategoryComponent,
   },
 ];
 
