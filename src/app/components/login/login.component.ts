@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { HelperService } from 'src/app/util/helper.service';
+
 
 @Component({
   selector: 'app-login',
@@ -9,19 +11,34 @@ import { HelperService } from 'src/app/util/helper.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+
+  credentials={
+    email: '',
+    password: '',
+  } 
+  
+
   isLoading = false;
-  constructor(private helperService: HelperService, private router: Router) {
+  constructor(private helperService: HelperService, private router: Router, private login:LoginService) {
     this.helperService.isLoading.subscribe((isLoading: boolean) => {
       this.isLoading = isLoading;
     });
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
-    });
   }
 
-  login() {
+
+
+
+
+  adminLogin() {
+
+
+// console.log('form is submitted');
+if((this.credentials.email!='' && this.credentials.password!='') &&(this.credentials.email!=null && this.credentials.password!=null))
+  {
+    this.login.generateToken(this.credentials).subscribe(
+      (response:any)=>{
+    console.log(response.token);
+    this.login.loginUser(response.token)
     this.helperService.openLoader(true);
     setTimeout(() => {
       this.helperService.openLoader();
@@ -36,5 +53,18 @@ export class LoginComponent {
         this.router.navigateByUrl('/dashboard');
       }, 3000);
     }, 2000);
+      },
+      error=>{
+    console.log(error);
+    
+      }
+      )
+}
+else{
+  console.log('fields are empty');
+  
+}
+
+
   }
 }

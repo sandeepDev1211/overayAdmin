@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TableComponent } from './components/table/table.component';
+import { AuthGuardGuard } from './guard/auth-guard.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'admin-login', pathMatch: 'full' },
@@ -14,7 +15,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./components/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
+        
       ),
+    canActivate:[AuthGuardGuard]
   },
   {
     path: 'categories',

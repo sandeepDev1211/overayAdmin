@@ -26,8 +26,8 @@ export class AddCategoryComponent {
 
   ngOnInit(): void {
     this.categoryForm = this.formBuilder.group({
-      type: ['', Validators.required],
       name: ['', Validators.required],
+      description: ['', Validators.required],
     });
 
     this.activatedRoute.params.subscribe((val) => {
@@ -61,7 +61,7 @@ export class AddCategoryComponent {
   categoryFormToUpdate(user: Category) {
     this.categoryForm.setValue({
       name: user.name,
-      type: user.type,
+      description: user.description,
     });
   }
 
