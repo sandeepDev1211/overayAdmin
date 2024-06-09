@@ -50,7 +50,7 @@ export class AddCategoryComponent {
 
   Save() {
     this.categoryService
-      .saveCategory(this.categoryForm.value)
+      .postCategory(this.categoryForm.value)
       .subscribe((res) => {
         this.toastr.success('Category Added Successfully');
         this.router.navigate(['/categories']);

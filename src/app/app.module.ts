@@ -28,6 +28,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ToastrModule } from 'ngx-toastr';
 import { NgConfirmModule } from 'ng-confirm-box';
+import { FormsModule } from '@angular/forms';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
@@ -61,6 +62,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MatPaginatorModule,
     MatSortModule,
     NgConfirmModule,
+    FormsModule,
     ToastrModule.forRoot()
   ],
   providers: [{
