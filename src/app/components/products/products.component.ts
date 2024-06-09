@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ProductService } from './product.service';
@@ -8,34 +8,33 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent {
-
+export class ProductsComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['productName', 'desc', 'price', 'rating','discount','totalQuantity','categoryID','subCategoryID'];
+  displayedColumns: string[] = ['id', 'name', 'code','price', 'discount', 'categories', 'action'];
 
   constructor(
     private router: Router,
-    private categoryService: ProductService,
+    private productService: ProductService,
     private confirmService: NgConfirmService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit() {
-    this.getProducts();
+    this.getProduct();
   }
 
   addProduct() {
-    this.router.navigate(['/categories/add-product']);
+    this.router.navigate(['/products/add-product']);
   }
 
   editProduct(id: number) {
-    this.router.navigate(['/categories/edit-product', id]);
+    this.router.navigate(['/products/edit-product', id]);
   }
 
-  getProducts() {
-    this.categoryService.getProduct().subscribe({
+  getProduct() {
+    this.productService.getProduct().subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);
       },
@@ -46,10 +45,9 @@ export class ProductsComponent {
   }
 
   deleteProduct(id: number) {
-    this.categoryService.deleteProduct(id).subscribe((res) => {
-      this.toastr.success('Category Deleted Successfully');
-      this.getProducts();
+    this.productService.deleteProduct(id).subscribe((res) => {
+      this.toastr.success('Product Deleted Successfully');
+      this.getProduct();
     });
   }
-
 }

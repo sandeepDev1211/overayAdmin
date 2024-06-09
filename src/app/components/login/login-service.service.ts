@@ -6,34 +6,32 @@ import { Injectable } from '@angular/core';
 })
 export class LoginServiceService {
 
-url="https://overay.therohankumar.com/v1/auth/login"
+url="http://localhost:5000/v1/auth/login"
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  generateToken(credentials:any){
-
-    return this.http.post(`${this.url}`,credentials)
-
+  generateToken(credentials: any) {
+    return this.http.post(`${this.url}`, credentials)
   }
-
 
   // storeToken(tokenValue: string){
   //   localStorage.setItem('token', tokenValue)
   // }
 
-
-  loginUser(token: string){
-    localStorage.setItem('token',token)
+  loginUser(token: string) {
+    localStorage.setItem('token', token)
     return true
-    }
+  }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem('token')
   }
 
-  isLoggedIn(): boolean{
-    return !!localStorage.getItem('token')
-  }
+  // isLoggedIn(): boolean {
+  //   const token = localStorage.getItem('token');
+  //   return !!token; 
+  // }
+}
 
 
 
@@ -68,4 +66,4 @@ url="https://overay.therohankumar.com/v1/auth/login"
 // }
 
 
-}
+

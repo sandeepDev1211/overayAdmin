@@ -1,1 +1,115 @@
-<p>coupons works!</p>
+<mat-toolbar color="primary">
+  <span class="example-spacer"></span>
+  <button mat-raised-button (click)="addCoupon()" value="Next">
+    ADD COUPON
+  </button>
+</mat-toolbar>
+
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+    </ng-container>
+
+    <!-- Code Column -->
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
+      <td mat-cell *matCellDef="let row">{{ row.code }}</td>
+    </ng-container>
+
+    <!-- Discount Type Column -->
+    <ng-container matColumnDef="discount_type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount Type</th>
+      <td mat-cell *matCellDef="let row">{{ row.discount_type }}</td>
+    </ng-container>
+
+    <!-- Discount Value Column -->
+    <ng-container matColumnDef="discount_value">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount Value</th>
+      <td mat-cell *matCellDef="let row">{{ row.discount_value }}</td>
+    </ng-container>
+
+    <!-- Valid From Column -->
+    <ng-container matColumnDef="valid_from">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Valid From</th>
+      <td mat-cell *matCellDef="let row">{{ row.valid_from }}</td>
+    </ng-container>
+
+    <!-- Valid Until Column -->
+    <ng-container matColumnDef="valid_until">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Valid Until</th>
+      <td mat-cell *matCellDef="let row">{{ row.valid_until }}</td>
+    </ng-container>
+
+    <!-- Min Order Amount Column -->
+    <ng-container matColumnDef="min_order_amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Min Order Amount</th>
+      <td mat-cell *matCellDef="let row">{{ row.min_order_amount }}</td>
+    </ng-container>
+
+    <!-- Applicable Products Column -->
+    <ng-container matColumnDef="applicable_products">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Applicable Products</th>
+      <td mat-cell *matCellDef="let row">{{ row.applicable_products }}</td>
+    </ng-container>
+
+    <!-- Applicable Categories Column -->
+    <ng-container matColumnDef="applicable_categories">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Applicable Categories</th>
+      <td mat-cell *matCellDef="let row">{{ row.applicable_categories }}</td>
+    </ng-container>
+
+    <!-- Usage Limit Column -->
+    <ng-container matColumnDef="usage_limit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Usage Limit</th>
+      <td mat-cell *matCellDef="let row">{{ row.usage_limit }}</td>
+    </ng-container>
+
+    <!-- Used Count Column -->
+    <ng-container matColumnDef="used_count">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Used Count</th>
+      <td mat-cell *matCellDef="let row">{{ row.used_count }}</td>
+    </ng-container>
+
+    <!-- Is Active Column -->
+    <ng-container matColumnDef="is_active">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Is Active</th>
+      <td mat-cell *matCellDef="let row">{{ row.is_active }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          mat-icon-button
+          [routerLink]="['/coupons/view-coupon', row.id]"
+          class="mx-2"
+          color="warn"
+        >
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
+        <button
+          mat-icon-button
+          (click)="editCoupon(row.id)"
+          class="mx-2"
+          color="accent"
+        >
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+        <!-- <button
+          mat-icon-button
+          (click)="deleteCoupon(row.id)"
+          color="primary"
+        >
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button> -->
+      </td>
+    </ng-container>
+
+    <!-- Table Header and Row Declarations -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
