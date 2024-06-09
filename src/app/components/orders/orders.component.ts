@@ -19,12 +19,16 @@ orderId: any;
 
 
 
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private router: Router,
+    private orderService: OrderService) {}
 
   ngOnInit(): void {
     this.getOrderDetails();
   }
-
+  addOrder() {
+    this.router.navigate(['/orders/add-order']);
+  }
   getOrderDetails() {
     this.orderService.getOrder().subscribe({
       next: (res) => {

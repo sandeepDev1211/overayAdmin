@@ -19,6 +19,26 @@
       "type": "Abc",
       "name": "Shorts",
       "id": 4
+    },
+    {
+      "type": "Women",
+      "name": "Lehnga",
+      "id": 5
+    },
+    {
+      "description": "vfxdgfdm",
+      "name": "ghgfcgj",
+      "id": 6
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "tshirt",
+      "code": "502",
+      "price": "699",
+      "discount": "20%",
+      "categories": "women"
     }
   ]
 }
