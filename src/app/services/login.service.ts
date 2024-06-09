@@ -5,6 +5,9 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginService {
+  isLoggedIn() {
+    throw new Error('Method not implemented.');
+  }
   isAdminLoggedIn = new Subject<boolean>();
   constructor() {}
 

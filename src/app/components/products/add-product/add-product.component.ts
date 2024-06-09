@@ -26,15 +26,13 @@ export class AddProductComponent {
 
   ngOnInit(): void {
     this.ProductForm = this.formBuilder.group({
-      productName: ['', Validators.required],
-      desc: ['', Validators.required],
-      price: ['', Validators.required],
+      id: ['', Validators.required],
+      name: ['', Validators.required],
+      code: ['', Validators.required],
       // imgColor: ['', Validators.required],
-      rating: ['', Validators.required],
+      price: ['', Validators.required],
       discount: ['', Validators.required],
-      totalQuantity: ['', Validators.required],
-      categoryID: ['', Validators.required],
-      subCategoryID: ['', Validators.required],
+      categories: ['', Validators.required],
     });
 
     this.activatedRoute.params.subscribe((val) => {
@@ -55,25 +53,23 @@ export class AddProductComponent {
     });
   }
 
-  SaveProduct() {
+ 
+  Save() {
     this.productService
-      .postProduct(this.ProductForm.value)
-      .subscribe((res) => {
-        this.toastr.success('Product Added Successfully');
+    .postProduct(this.ProductForm.value)    .subscribe((res) => {
+        this.toastr.success('Category Added Successfully');
+        this.router.navigate(['/products']);
         this.ProductForm.reset();
       });
   }
 
-ProductFormToUpdate(user: Product) {
+  ProductFormToUpdate(user: Product) {
     this.ProductForm.setValue({
-      productName: user.productName,
-      desc: user.desc,
-      price:user.price,
-      rating: user.rating,
-      discount: user.discount,
-      totalQuantity: user.totalQuantity,
-      categoryID: user.categoryID,
-      subCategoryID: user.subCategoryID,
+      name: user.name,
+       code: user.code,
+       price:user.price,
+       discount: user.discount,
+       category: user.category,
     });
   }
 
@@ -81,10 +77,33 @@ ProductFormToUpdate(user: Product) {
     this.productService
       .updateProduct(this.ProductForm.value, this.productIdToUpdate)
       .subscribe((res) => {
-        this.toastr.success('Category Updated Successfully');
-        this.router.navigate(['/categories']);
+        this.toastr.success('Product Updated Successfully');
+        this.router.navigate(['/products']);
         this.ProductForm.reset();
       });
   }
+
+// ProductFormToUpdate(user: Product) {
+//     this.ProductForm.setValue({
+//       productName: user.productName,
+//       desc: user.desc,
+//       price:user.price,
+//       rating: user.rating,
+//       discount: user.discount,
+//       totalQuantity: user.totalQuantity,
+//       categoryID: user.categoryID,
+//       subCategoryID: user.subCategoryID,
+//     });
+//   }
+
+//   update() {
+//     this.productService
+//       .updateProduct(this.ProductForm.value, this.productIdToUpdate)
+//       .subscribe((res) => {
+//         this.toastr.success('Product Added Successfully');
+//         this.router.navigate(['/categories']);
+//         this.ProductForm.reset();
+//       });
+//   }
   
 }

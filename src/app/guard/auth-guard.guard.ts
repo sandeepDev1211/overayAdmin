@@ -12,6 +12,7 @@ import { LoginService } from '../services/login.service';
   providedIn: 'root',
 })
 export class AuthGuardGuard implements CanActivate {
+  
   isLoggedIn = false;
   constructor(private loginService: LoginService) {
     this.loginService.isAdminLoggedIn.subscribe((isLoggedIn: boolean) => {

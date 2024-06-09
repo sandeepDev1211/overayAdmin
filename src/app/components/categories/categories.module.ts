@@ -17,14 +17,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ToastrModule } from 'ngx-toastr';
 import { NgConfirmModule } from 'ng-confirm-box';
-import { AddSubCategoryComponent } from './add-sub-category/add-sub-category.component';
+
 
 
 @NgModule({
   declarations: [
     CategoriesComponent,
     AddCategoryComponent,
-    AddSubCategoryComponent
+
   ],
   imports: [
     CommonModule,

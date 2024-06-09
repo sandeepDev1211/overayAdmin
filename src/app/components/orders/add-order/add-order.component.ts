@@ -42,6 +42,7 @@ export class AddOrderComponent {
       .postOrder(this.orderForm.value)
       .subscribe((res) => {
         this.toastr.success('Order Added Successfully');
+        this.router.navigate(['/orders']);
         this.orderForm.reset();
       });
   }
