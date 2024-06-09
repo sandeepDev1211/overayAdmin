@@ -37,7 +37,7 @@ url='http://localhost:5000/v1/auth/login'
       return true
     }
 
-    getToken(){
+    getToken(): string | null{
       return localStorage.getItem('token')
     }
 

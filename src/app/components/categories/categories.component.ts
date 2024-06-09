@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CategoriesComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['id', 'type', 'name', 'action'];
+  displayedColumns: string[] = ['_id', 'name', 'description', 'action'];
 
   constructor(
     private router: Router,
@@ -29,8 +29,8 @@ export class CategoriesComponent implements OnInit {
     this.router.navigate(['/categories/add-category']);
   }
 
-  editCategory(id: number) {
-    this.router.navigate(['/categories/edit-category', id]);
+  editCategory(_id: number) {
+    this.router.navigate(['/categories/edit-category', _id]);
   }
 
   getCategories() {
@@ -44,8 +44,8 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  deleteCategory(id: number) {
-    this.categoryService.deleteCategory(id).subscribe((res) => {
+  deleteCategory(_id: number) {
+    this.categoryService.deleteCategory(_id).subscribe((res) => {
       this.toastr.success('Category Deleted Successfully');
       this.getCategories();
     });
