@@ -15,7 +15,7 @@ import * as _ from 'lodash';
 export class AddCategoryComponent {
   public categoryIdToUpdate!: number;
   public isUpdateActive: boolean = false;
-  public categories:[] = [];
+  public categories:Array<Category> = [];
   categoryForm!: FormGroup;
 
   constructor(
@@ -50,14 +50,14 @@ export class AddCategoryComponent {
 
   getCategories() {
     this.categoryService.getCategory().subscribe({
-      next: (res) => {
-        this.categories = res?.map((cat:any) => {
-          return {
-            name : cat.name,
-            _id : cat._id
+      next: (res:Array<Category>) => {
+        this.categories = _.map(res, function(cat:Category) {
+          return  {
+            _id: cat['_id'],
+            name : cat['name'],
+            description: cat['description']
           }
         });
-        console.log("this.categories : ",this.categories );
       },
       error: (err) => {
         console.log(err);

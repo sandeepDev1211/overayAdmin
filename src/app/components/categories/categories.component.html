@@ -34,14 +34,6 @@
       <td mat-cell *matCellDef="let row">
         <button
           mat-icon-button
-          [routerLink]="['/categories/view-category', row._id]"
-          class="mx-2"
-          color="warn"
-        >
-          <i class="fa fa-eye" aria-hidden="true"></i>
-        </button>
-        <button
-          mat-icon-button
           (click)="editCategory(row._id, row)"
           class="mx-2"
           color="accent"
