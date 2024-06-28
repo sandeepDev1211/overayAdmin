@@ -5,6 +5,7 @@ import { CategoryService } from '../category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../models/category.model';
 import { NgConfirmService } from 'ng-confirm-box';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-add-category',
@@ -12,8 +13,9 @@ import { NgConfirmService } from 'ng-confirm-box';
   styleUrls: ['./add-category.component.scss'],
 })
 export class AddCategoryComponent {
-  private categoryIdToUpdate!: number;
+  public categoryIdToUpdate!: number;
   public isUpdateActive: boolean = false;
+  public categories:[] = [];
   categoryForm!: FormGroup;
 
   constructor(
@@ -24,31 +26,49 @@ export class AddCategoryComponent {
     private router: Router
   ) {}
 
+
   ngOnInit(): void {
+    this.getCategories();
     this.categoryForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      parent_category: ['']
     });
 
     this.activatedRoute.params.subscribe((val) => {
+      console.log("value : ",val);
       this.categoryIdToUpdate = val['id'];
       if (this.categoryIdToUpdate) {
         this.isUpdateActive = true;
-        this.categoryService
-          .getCategoryById(this.categoryIdToUpdate)
-          .subscribe({
-            next: (res) => {
-              this.categoryFormToUpdate(res);
-            },
-            error: (err) => {
-              console.log(err);
-            },
-          });
+        this.categoryForm.patchValue({
+          name: val["name"],
+          description: val["description"]
+        });
       }
     });
   }
 
+  getCategories() {
+    this.categoryService.getCategory().subscribe({
+      next: (res) => {
+        this.categories = res?.map((cat:any) => {
+          return {
+            name : cat.name,
+            _id : cat._id
+          }
+        });
+        console.log("this.categories : ",this.categories );
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
   Save() {
+    if (_.isEmpty(this.categoryForm.value["parent_category"])) {
+      delete this.categoryForm.value["parent_category"];
+    }
     this.categoryService
       .postCategory(this.categoryForm.value)
       .subscribe((res) => {
@@ -66,8 +86,9 @@ export class AddCategoryComponent {
   }
 
   update() {
+    delete this.categoryForm.value["parent_category"];
     this.categoryService
-      .updateCategory(this.categoryForm.value, this.categoryIdToUpdate)
+      .updateCategory({...this.categoryForm.value, _id: this.categoryIdToUpdate })
       .subscribe((res) => {
         this.toastr.success('Category Updated Successfully');
         this.router.navigate(['/categories']);

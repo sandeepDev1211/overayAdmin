@@ -10,6 +10,12 @@
         <input matInput placeholder="Description" formControlName="description" />
       </mat-form-field>
 
+      <mat-form-field *ngIf="!categoryIdToUpdate">
+        <mat-label>Select Parent Category</mat-label>
+        <mat-select  formControlName="parent_category">
+            <mat-option *ngFor="let category of categories; index as i;" [value]="category['_id']">{{category["name"]}}</mat-option>
+        </mat-select>
+      </mat-form-field>
       <button
         *ngIf="!isUpdateActive"
         (click)="Save()"
