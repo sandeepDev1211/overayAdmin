@@ -27,6 +27,10 @@ url="http://localhost:5000/v1/auth/login"
     return localStorage.getItem('token')
   }
 
+  logout() {
+    return localStorage.clear();
+  }
+
   // isLoggedIn(): boolean {
   //   const token = localStorage.getItem('token');
   //   return !!token; 

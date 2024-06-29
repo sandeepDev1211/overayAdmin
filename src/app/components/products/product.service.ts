@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from './models/product.model';
+import { AppConstants } from 'src/app/util/app-constant';
 
 
 @Injectable({
@@ -9,27 +10,39 @@ import { Product } from './models/product.model';
 })
 export class ProductService {
 
+  public url:string = AppConstants.BASE_URL;
+
   constructor(private http: HttpClient) {}
 
-  postProduct(categories: any) {
-    return this.http.post<any>(' http://localhost:3000/products', categories);
+  postProduct(productData: any) {
+    return this.http.post<any>(`${this.url}/v1/admin/Product/save`, productData);
   }
 
   getProduct() {
-    return this.http.get<any>(' http://localhost:3000/products');
+    return this.http.post<any>(`${this.url}/v1/admin/Product/list`, 
+    {
+      "filter": {},
+      "sort": {},
+      "start": 0,
+      "limit": 10
+  });
   }
 
   getProductById(id: number) {
-    return this.http.get<Product>('http://localhost:3000/products/' + id);
+    return this.http.get<Product>(`${this.url}/products` + id);
   }
 
   updateProduct(categories: any, id: number) {
     return this.http.put<Product>(
-      ' http://localhost:3000/products/' + id,
+      `${this.url}/products` + id,
       categories
     );
   }
-   deleteProduct(id: number): Observable<any> {
-    return this.http.delete(`http://localhost:3000/products/${id}`);
+   deleteProduct(_id: string): Observable<any> {
+    return this.http.post(`${this.url}/v1/admin/Product/delete`, {
+      data: {
+        _id
+      } 
+    });
   }
 }

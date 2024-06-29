@@ -1,5 +1,6 @@
 <div class="product-container">
     <div class="productCenter">
+      {{ProductForm.value | json}}
       <form [formGroup]="ProductForm">
         <mat-form-field appearance="fill">
           <mat-label>Product Name</mat-label>
@@ -17,14 +18,19 @@
             <mat-label>Discount</mat-label>
             <input matInput placeholder="Discount" formControlName="discount" />
           </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Categories</mat-label>
-            <input matInput placeholder="Categories" formControlName="categories" />
+          <mat-form-field>
+            <mat-label>Select Categories</mat-label>
+            <mat-select  formControlName="categories" multiple>
+                <mat-option *ngFor="let category of categoryList; index as i;" [value]="category['_id']">{{category["name"]}}</mat-option>
+            </mat-select>
           </mat-form-field>
-          
-  
+          <div>
+            <input type="file" class="file-upload" (change)="selectFile($event)">
+          </div>
+          <p></p>
           <button
           *ngIf="!isUpdateActive"
+          [disabled]="!currentFile"
           (click)="Save()"
           mat-raised-button
           color="accent"
