@@ -8,6 +8,7 @@ import { CategoryService } from '../../categories/category.service';
 import * as _ from 'lodash';
 import { CategoriesModule } from '../../categories/categories.module';
 import { Category } from '../../categories/models/category.model';
+import { AppConstants } from 'src/app/util/app-constant';
 
 @Component({
   selector: 'app-add-product',
@@ -16,12 +17,15 @@ import { Category } from '../../categories/models/category.model';
 })
 export class AddProductComponent {
 
+  public url:string = AppConstants.BASE_URL;
+  public img_url:string = `${this.url}/v1/file`;
   private productIdToUpdate!: number;
   public isUpdateActive: boolean = false;
   ProductForm!: FormGroup;
   public categoryList:Array<Category> = [];
   public fileName:string  = 'Select Product Image';
   public currentFile:any;
+  public prdctImgUrl!:string;
 
   constructor(
     private toastr: ToastrService,
@@ -35,7 +39,6 @@ export class AddProductComponent {
   ngOnInit(): void {
     this.getCategories();
     this.ProductForm = this.formBuilder.group({
-      id: ['', Validators.required],
       name: ['', Validators.required],
       code: ['', Validators.required],
       price: ['', Validators.required],
@@ -50,7 +53,9 @@ export class AddProductComponent {
         this.productService
           .getProductById(this.productIdToUpdate)
           .subscribe({
-            next: (res) => {
+            next: (res:any) => {
+              this.prdctImgUrl = `${this.img_url}/${res['default_image']}`;
+              console.log("image url : ",this.prdctImgUrl);
               this.ProductFormToUpdate(res);
             },
             error: (err) => {
@@ -101,20 +106,24 @@ export class AddProductComponent {
 
   }
 
-  ProductFormToUpdate(user: Product) {
+  ProductFormToUpdate(product: Product) {
     this.ProductForm.setValue({
-      name: user.name,
-       code: user.code,
-       price:user.price,
-       discount: user.discount,
-       category: user.category,
+      name: product.name,
+       code: product.code,
+       price:product.price,
+       discount: product.discount,
+       categories: _.map(product.categories, (cat:any)=> cat['_id']),
     });
   }
 
   update() {
+    const formData: FormData = new FormData();
+    if (this.currentFile) {
+      formData.append('image', this.currentFile);
+    }
+    formData.append('data', JSON.stringify({...this.ProductForm.value, _id:this.productIdToUpdate}));
     this.productService
-      .updateProduct(this.ProductForm.value, this.productIdToUpdate)
-      .subscribe((res) => {
+    .updateProduct(formData).subscribe((res) => {
         this.toastr.success('Product Updated Successfully');
         this.router.navigate(['/products']);
         this.ProductForm.reset();

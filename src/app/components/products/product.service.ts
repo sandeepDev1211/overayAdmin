@@ -29,14 +29,11 @@ export class ProductService {
   }
 
   getProductById(id: number) {
-    return this.http.get<Product>(`${this.url}/products` + id);
+    return this.http.get<Product>(`${this.url}/v1/admin/Product/` + id);
   }
 
-  updateProduct(categories: any, id: number) {
-    return this.http.put<Product>(
-      `${this.url}/products` + id,
-      categories
-    );
+  updateProduct(productData: any) {
+    return this.http.post<any>(`${this.url}/v1/admin/Product/save`, productData);
   }
    deleteProduct(_id: string): Observable<any> {
     return this.http.post(`${this.url}/v1/admin/Product/delete`, {
