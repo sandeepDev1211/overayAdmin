@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { HelperService } from './util/helper.service';
 import { Router } from '@angular/router';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,9 @@ export class AppComponent {
   @ViewChild('sideNav') sideNav: any;
 
   isLoading = false;
-  constructor(private helperService: HelperService, private router: Router) {
+  constructor(private helperService: HelperService, 
+    private router: Router, 
+    private loginService:LoginService) {
     this.helperService.isLoading.subscribe((loading: boolean) => {
       this.isLoading = loading;
     });
@@ -33,6 +36,7 @@ export class AppComponent {
 
   logout(logout: boolean) {
     this.helperService.isLoading.next(true);
+    this.loginService.logout();
     setTimeout(() => {
       this.helperService.isLoading.next(false);
       this.navigateToURL('/admin-login');

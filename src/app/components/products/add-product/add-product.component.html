@@ -7,7 +7,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Product Code</mat-label>
-          <input matInput placeholder="Product Code" formControlName="code" />
+          <input matInput placeholder="Product Code" formControlName="code" [readonly]="isUpdateActive" />
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Price</mat-label>
@@ -17,14 +17,23 @@
             <mat-label>Discount</mat-label>
             <input matInput placeholder="Discount" formControlName="discount" />
           </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Categories</mat-label>
-            <input matInput placeholder="Categories" formControlName="categories" />
+          <mat-form-field>
+            <mat-label>Select Categories</mat-label>
+            <mat-select  formControlName="categories" multiple>
+                <mat-option *ngFor="let category of categoryList; index as i;" [value]="category['_id']">{{category["name"]}}</mat-option>
+            </mat-select>
           </mat-form-field>
-          
-  
+          <span *ngIf="prdctImgUrl && !currentFile">
+            <img height="100px" width="100px" [src]="prdctImgUrl">
+          </span>
+          <p></p>
+          <div>
+            <input type="file" class="file-upload" (change)="selectFile($event)" accept="image/*">
+          </div>
+          <p></p>
           <button
           *ngIf="!isUpdateActive"
+          [disabled]="!currentFile || !ProductForm.valid"
           (click)="Save()"
           mat-raised-button
           color="accent"
@@ -34,6 +43,7 @@
         <button
           *ngIf="isUpdateActive"
           (click)="update()"
+          [disabled]="!ProductForm.valid"
           mat-raised-button
           color="accent"
         >

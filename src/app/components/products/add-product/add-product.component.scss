@@ -9,3 +9,31 @@
         }
     }
 }
+
+.progress-bar {
+    padding: 0;
+  }
+  
+  .progress {
+    width: 50px;
+  }
+  
+ 
+  
+  .mat-toolbar-single-row button {
+    width: 100px;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    display: block;
+  }
+
+  .text-class {
+    word-wrap: break-word;
+    word-break: break-all;
+    height: 80px;
+}

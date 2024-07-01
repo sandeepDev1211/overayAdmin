@@ -3,6 +3,8 @@ export class Product {
     code!: string;
     price!:number;
     discount!:number;
-    category!:string;
+    categories!:Array<string>;
+
+    private constructor(public _id:string){}
    
   }

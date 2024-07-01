@@ -33,8 +33,8 @@ url='http://localhost:5000/v1/auth/login'
     }
 
     logout(){
-      localStorage.removeItem('token')
-      return true
+      localStorage.clear();
+      return true;
     }
 
     getToken(): string | null{

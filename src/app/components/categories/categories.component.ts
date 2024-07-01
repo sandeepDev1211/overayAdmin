@@ -29,8 +29,17 @@ export class CategoriesComponent implements OnInit {
     this.router.navigate(['/categories/add-category']);
   }
 
-  editCategory(_id: number) {
-    this.router.navigate(['/categories/edit-category', _id]);
+  editCategory(_id: number, data:any) {
+    this.router.navigate(
+     [
+        '/categories/edit-category', 
+      _id,
+    {
+      name : data["name"],
+      description: data["description"]
+    }
+    ]
+    );
   }
 
   getCategories() {
@@ -44,8 +53,8 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  deleteCategory(_id: number) {
-    this.categoryService.deleteCategory(_id).subscribe((res) => {
+  deleteCategory(_id:string) {
+    this.categoryService.deleteCategory({data: {_id}}).subscribe((res) => {
       this.toastr.success('Category Deleted Successfully');
       this.getCategories();
     });
