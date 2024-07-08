@@ -5,48 +5,60 @@
         <mat-label>Name</mat-label>
         <input matInput placeholder="Type" formControlName="code" />
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field>
         <mat-label>Discount Type</mat-label>
-        <input matInput placeholder="Name" formControlName="discount_type" />
-        </mat-form-field>
+        <mat-select  formControlName="discount_type">
+            <mat-option  value="percentage">Percentage</mat-option>
+            <mat-option  value="fixed">Fixed</mat-option>
+        </mat-select>
+      </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Discount Value</mat-label>
-          <input matInput placeholder="Type" formControlName="discount_value" />
+          <input matInput placeholder="Type" formControlName="discount_value"  type="number" />
         </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Valid From</mat-label>
-          <input matInput placeholder="Valid From" formControlName="valid_from" />
+        <mat-form-field>
+          <mat-label>Choose From Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="valid_from">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Valid Until</mat-label>
-            <input matInput placeholder="Valid Until" formControlName="valid_until" />
-          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Valid Until</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="valid_until">
+          <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Min Order Amount </mat-label>
-            <input matInput placeholder="Min Order Amount" formControlName="min_order_amount" />
+            <input matInput placeholder="Min Order Amount" formControlName="min_order_amount"  type="number" />
           </mat-form-field>
-            <mat-form-field appearance="fill">
-              <mat-label>Applicable Products</mat-label>
-              <input matInput placeholder="Applicable Products" formControlName="applicable_products" />
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-              <mat-label>Applicable Categories</mat-label>
-              <input matInput placeholder="Name" formControlName="applicable_categories" />
-              </mat-form-field>
+          <mat-form-field>
+            <mat-label>Applicable Products</mat-label>
+            <mat-select  formControlName="applicable_products" multiple>
+                <mat-option *ngFor="let product of productList; index as i;" [value]="product['_id']">{{product["name"]}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Applicable Categories</mat-label>
+            <mat-select  formControlName="applicable_categories" multiple>
+                <mat-option *ngFor="let category of categoryList; index as i;" [value]="category['_id']">{{category["name"]}}</mat-option>
+            </mat-select>
+          </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Usage Limit</mat-label>
-                <input matInput placeholder="Usage Limit" formControlName="usage_limit" />
+                <input matInput placeholder="Usage Limit" formControlName="usage_limit"  type="number"/>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Used Count</mat-label>
-                <input matInput placeholder="Used Count" formControlName="used_count" />
+                <input matInput placeholder="Used Count" formControlName="used_count"  type="number" />
               </mat-form-field>
-                <mat-form-field appearance="fill">
-                  <mat-label>Active</mat-label>
-                  <input matInput placeholder="Active" formControlName="is_active" />
-                </mat-form-field>
-                
-      
+              <mat-form-field>
+                <mat-label>Status</mat-label>
+                <mat-select  formControlName="is_active">
+                    <mat-option  [value]="true">Active</mat-option>
+                    <mat-option  [value]="false">In-Active</mat-option>
+                </mat-select>
+              </mat-form-field>
                 <button
                 *ngIf="!isUpdateActive"
                 (click)="Save()"

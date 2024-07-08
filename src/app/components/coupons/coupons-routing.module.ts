@@ -17,11 +17,7 @@ const routes: Routes = [
   {
     path: 'edit-coupon/:id',
     component: AddCouponComponent,
-  },
-  {
-    path: 'view-coupon/:id',
-    component: AddCouponComponent,
-  },
+  }
 ];
 
 

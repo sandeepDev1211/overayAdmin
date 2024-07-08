@@ -17,6 +17,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgConfirmModule } from 'ng-confirm-box';
 //import { CouponsComponent } from './coupons.component';
 import { CouponComponent } from './coupons.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule, MAT_DATE_LOCALE,} from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +43,12 @@ import { CouponComponent } from './coupons.component';
     FormsModule,
     ReactiveFormsModule,
     NgConfirmModule,
+    MatDatepickerModule,
     ToastrModule.forRoot()
+  ],
+  providers: [MatNativeDateModule,
+    {provide: MAT_DATE_LOCALE, useValue: {useUtc: true} }
+    
   ]
 })
 export class CouponsModule { }
