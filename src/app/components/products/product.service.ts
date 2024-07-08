@@ -18,14 +18,9 @@ export class ProductService {
     return this.http.post<any>(`${this.url}/v1/admin/Product/save`, productData);
   }
 
-  getProduct() {
+  getProduct(filterParams:any = {}) {
     return this.http.post<any>(`${this.url}/v1/admin/Product/list`, 
-    {
-      "filter": {},
-      "sort": {},
-      "start": 0,
-      "limit": 10
-  });
+    filterParams);
   }
 
   getProductById(id: number) {
