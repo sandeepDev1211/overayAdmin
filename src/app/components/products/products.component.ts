@@ -111,4 +111,8 @@ export class ProductsComponent implements OnInit {
    });
   }
 
+  resetFilter() {
+    this.productFilterForm.reset();
+  }
+
 }
