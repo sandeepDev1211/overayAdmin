@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
   public img_url:string = `${this.url}/v1/file`;
   public productFilterForm!: FormGroup;
   public categoryList!:Array<any>;
-  displayedColumns: string[] = ['id', 'name', 'code','price', 'discount', 'categories', 'image', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'code','price', 'discount', 'quantity','weight','keywords','long_description','description','sku','color','size','categories', 'image', 'action'];
 
   constructor(
     private router: Router,
@@ -40,6 +40,14 @@ export class ProductsComponent implements OnInit {
       price: [''],
       discount: [''],
       categories: [''],
+      quantity: [''],
+      weight: [''],
+      keywords: [''],
+      long_description: [''],
+      description:[''],
+      sku: [''],
+      color: [''],
+      size: [''],
     });
   }
 

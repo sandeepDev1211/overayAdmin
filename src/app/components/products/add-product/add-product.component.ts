@@ -44,6 +44,14 @@ export class AddProductComponent {
       price: ['', Validators.required],
       discount: ['', Validators.required],
       categories: ['', Validators.required],
+      quantity: ['',Validators.required],
+      weight: ['',Validators.required],
+      keywords: ['',Validators.required],
+      long_description: ['',Validators.required],
+      description: ['',Validators.required],
+      sku: ['',Validators.required],
+      color: ['',Validators.required],
+      size: ['',Validators.required],
     });
 
     this.activatedRoute.params.subscribe((val) => {
