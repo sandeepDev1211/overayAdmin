@@ -1,86 +1,114 @@
 <div class="product-container">
-    <div class="productCenter">
-      <form [formGroup]="ProductForm">
-        <mat-form-field appearance="fill">
-          <mat-label>Product Name</mat-label>
-          <input matInput placeholder="name" formControlName="name" />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Product Code</mat-label>
-          <input matInput placeholder="Product Code" formControlName="code" [readonly]="isUpdateActive" />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Price</mat-label>
-            <input matInput placeholder="Price" formControlName="price" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Discount</mat-label>
-            <input matInput placeholder="Discount" formControlName="discount" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Quantity</mat-label>
-            <input matInput placeholder="Quantity" formControlName="quantity" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Weight</mat-label>
-            <input matInput placeholder="Weight" formControlName="weight" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Keywords</mat-label>
-            <input matInput placeholder="Keywords" formControlName="keywords" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Long description</mat-label>
-            <input matInput placeholder="Long description" formControlName="long_description" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
-            <input matInput placeholder="Description" formControlName="description" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>SKU</mat-label>
-            <input matInput placeholder="sku" formControlName="sku" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Color</mat-label>
-            <input matInput placeholder="Color" formControlName="color" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Size</mat-label>
-            <input matInput placeholder="Size" formControlName="size" />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Select Categories</mat-label>
-            <mat-select  formControlName="categories" multiple>
-                <mat-option *ngFor="let category of categoryList; index as i;" [value]="category['_id']">{{category["name"]}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <span *ngIf="prdctImgUrl && !currentFile">
-            <img height="100px" width="100px" [src]="prdctImgUrl">
-          </span>
-          <p></p>
-          <div>
-            <input type="file" class="file-upload" (change)="selectFile($event)" accept="image/*">
-          </div>
-          <p></p>
-          <button
-          *ngIf="!isUpdateActive"
-          [disabled]="!currentFile || !ProductForm.valid"
-          (click)="Save()"
-          mat-raised-button
-          color="accent"
-        >
-          Save
-        </button>
-        <button
-          *ngIf="isUpdateActive"
-          (click)="update()"
-          [disabled]="!ProductForm.valid"
-          mat-raised-button
-          color="accent"
-        >
-          Update
-        </button>
-      </form>
-    </div>
+  <div class="productCenter">
+    <form [formGroup]="ProductForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Product Name</mat-label>
+        <input matInput placeholder="name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Product Code</mat-label>
+        <input
+          matInput
+          placeholder="Product Code"
+          formControlName="code"
+          [readonly]="isUpdateActive"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput placeholder="Price" formControlName="price" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Discount</mat-label>
+        <input matInput placeholder="Discount" formControlName="discount" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Quantity</mat-label>
+        <input matInput placeholder="Quantity" formControlName="quantity" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Weight</mat-label>
+        <input
+          matInput
+          placeholder="Weight"
+          formControlName="weight"
+          type="number"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Keywords</mat-label>
+        <input matInput placeholder="Keywords" formControlName="keywords" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Long description</mat-label>
+        <textarea
+          matInput
+          rows="5"
+          placeholder="Long description"
+          formControlName="long_description"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input
+          matInput
+          placeholder="Description"
+          formControlName="description"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>SKU</mat-label>
+        <input matInput placeholder="sku" formControlName="sku" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Color</mat-label>
+        <input matInput placeholder="Color" formControlName="color" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Size</mat-label>
+        <input matInput placeholder="Size" formControlName="size" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select Categories</mat-label>
+        <mat-select formControlName="categories" multiple>
+          <mat-option
+            *ngFor="let category of categoryList; index as i"
+            [value]="category['_id']"
+            >{{ category["name"] }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <span *ngIf="prdctImgUrl && !currentFile">
+        <img height="100px" width="100px" [src]="prdctImgUrl" />
+      </span>
+      <p></p>
+      <div>
+        <input
+          type="file"
+          class="file-upload"
+          (change)="selectFile($event)"
+          accept="image/*"
+        />
+      </div>
+      <p></p>
+      <button
+        *ngIf="!isUpdateActive"
+        [disabled]="!currentFile || !ProductForm.valid"
+        (click)="Save()"
+        mat-raised-button
+        color="accent"
+      >
+        Save
+      </button>
+      <button
+        *ngIf="isUpdateActive"
+        (click)="update()"
+        [disabled]="!ProductForm.valid"
+        mat-raised-button
+        color="accent"
+      >
+        Update
+      </button>
+    </form>
   </div>
+</div>

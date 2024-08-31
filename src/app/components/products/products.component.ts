@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ProductService } from './product.service';
 import { NgConfirmService } from 'ng-confirm-box';
 import { ToastrService } from 'ngx-toastr';
-import { AppConstants } from 'src/app/util/app-constant'; 
+import { AppConstants } from 'src/app/util/app-constant';
 import * as _ from 'lodash';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryService } from '../categories/category.service';
@@ -15,12 +15,27 @@ import { CategoryService } from '../categories/category.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  dataSource!:any;
-  public url:string = AppConstants.BASE_URL;
-  public img_url:string = `${this.url}/v1/file`;
+  dataSource!: any;
+  public url: string = AppConstants.BASE_URL;
+  public img_url: string = `${this.url}/v1/file`;
   public productFilterForm!: FormGroup;
-  public categoryList!:Array<any>;
-  displayedColumns: string[] = ['id', 'name', 'code','price', 'discount', 'quantity','weight','keywords','long_description','description','sku','color','size','categories', 'image', 'action'];
+  public categoryList!: Array<any>;
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'code',
+    'price',
+    'discount',
+    'quantity',
+    'weight',
+    'keywords',
+    'description',
+    'sku',
+    'color',
+    'size',
+    'categories',
+    'action',
+  ];
 
   constructor(
     private router: Router,
@@ -28,7 +43,7 @@ export class ProductsComponent implements OnInit {
     private confirmService: NgConfirmService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private categoryService:CategoryService
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit() {
@@ -44,7 +59,7 @@ export class ProductsComponent implements OnInit {
       weight: [''],
       keywords: [''],
       long_description: [''],
-      description:[''],
+      description: [''],
       sku: [''],
       color: [''],
       size: [''],
@@ -62,7 +77,7 @@ export class ProductsComponent implements OnInit {
   getProduct() {
     this.productService.getProduct().subscribe({
       next: (res) => {
-        this.dataSource = this.getmappedProduct(res)
+        this.dataSource = this.getmappedProduct(res);
       },
       error: (err) => {
         console.log(err);
@@ -70,33 +85,29 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  getmappedProduct(productListData:any) {
-    return  _.map(productListData, (p)=>{
-          return {
-            ...p,
-            default_image: `${this.img_url}/${p['default_image']}`,
-            categories: _.join(_.map(p.categories, (cat)=> cat['name']), ' | ')
-          };
+  getmappedProduct(productListData: any) {
+    return _.map(productListData, (p) => {
+      return {
+        ...p,
+        default_image: `${this.img_url}/${p['default_image']}`,
+        categories: _.join(
+          _.map(p.categories, (cat) => cat['name']),
+          ' | '
+        ),
+      };
     });
   }
 
   getCategory() {
-    this.categoryService.getCategory().subscribe(catLis =>{
-     this.categoryList = _.map(catLis, cat =>{
-      return {
-        _id:cat._id,
-        name: cat.name
-      }
-     });
+    this.categoryService.getCategory().subscribe((catLis) => {
+      this.categoryList = _.map(catLis, (cat) => {
+        return {
+          _id: cat._id,
+          name: cat.name,
+        };
+      });
     });
   }
-
-  getImageURl(prData:any) {
-    console.log(`${this.img_url}/${prData['default_image']}`);
-    return `${this.img_url}/${prData['default_image']}` 
-
-  }
-
 
   deleteProduct(id: string) {
     this.productService.deleteProduct(id).subscribe((res) => {
@@ -106,22 +117,23 @@ export class ProductsComponent implements OnInit {
   }
 
   getFilteredProduct() {
-    const filterValue:any = {};
-    _.map(Object.keys(this.productFilterForm.value), (key)=>{
+    const filterValue: any = {};
+    _.map(Object.keys(this.productFilterForm.value), (key) => {
       if (this.productFilterForm.value[key]) {
-        filterValue[key] = this.productFilterForm.value[key]
+        filterValue[key] = this.productFilterForm.value[key];
       }
-    }); 
-   this.productService.getProduct({
-    filter: filterValue
-   }).subscribe((resData)=>{
-      this.dataSource = this.getmappedProduct(resData);
-   });
+    });
+    this.productService
+      .getProduct({
+        filter: filterValue,
+      })
+      .subscribe((resData) => {
+        this.dataSource = this.getmappedProduct(resData);
+      });
   }
 
   resetFilter() {
     this.productFilterForm.reset();
     this.getProduct();
   }
-
 }
