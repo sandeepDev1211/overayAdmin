@@ -4,23 +4,26 @@ import { Observable } from 'rxjs';
 import { Product } from './models/product.model';
 import { AppConstants } from 'src/app/util/app-constant';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-
-  public url:string = AppConstants.BASE_URL;
+  public url: string = AppConstants.BASE_URL;
 
   constructor(private http: HttpClient) {}
 
   postProduct(productData: any) {
-    return this.http.post<any>(`${this.url}/v1/admin/Product/save`, productData);
+    return this.http.post<any>(
+      `${this.url}/v1/admin/Product/save`,
+      productData
+    );
   }
 
-  getProduct(filterParams:any = {}) {
-    return this.http.post<any>(`${this.url}/v1/admin/Product/list`, 
-    filterParams);
+  getProduct(filterParams: any = {}) {
+    return this.http.post<any>(
+      `${this.url}/v1/admin/Product/list`,
+      filterParams
+    );
   }
 
   getProductById(id: number) {
@@ -28,13 +31,23 @@ export class ProductService {
   }
 
   updateProduct(productData: any) {
-    return this.http.post<any>(`${this.url}/v1/admin/Product/save`, productData);
+    return this.http.post<any>(
+      `${this.url}/v1/admin/Product/save`,
+      productData
+    );
   }
-   deleteProduct(_id: string): Observable<any> {
+
+  uploadProductFeatureImages(images: any) {
+    return this.http.post<any>(
+      `${this.url}/v1/admin/ProductImage/save`,
+      images
+    );
+  }
+  deleteProduct(_id: string): Observable<any> {
     return this.http.post(`${this.url}/v1/admin/Product/delete`, {
       data: {
-        _id
-      } 
+        _id,
+      },
     });
   }
 }

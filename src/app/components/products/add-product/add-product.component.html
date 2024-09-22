@@ -78,22 +78,55 @@
           >
         </mat-select>
       </mat-form-field>
-      <span *ngIf="prdctImgUrl && !currentFile">
-        <img height="100px" width="100px" [src]="prdctImgUrl" />
-      </span>
-      <p></p>
-      <div>
-        <input
-          type="file"
-          class="file-upload"
-          (change)="selectFile($event)"
-          accept="image/*"
-        />
+      <div class="row">
+        <div class="col-3">
+          <h4>Default Image</h4>
+          <span *ngIf="prdctImgUrl && !currentFile">
+            <img height="100px" width="100px" [src]="prdctImgUrl" />
+          </span>
+          <p></p>
+          <div>
+            <input
+              type="file"
+              class="file-upload"
+              (change)="selectFile($event)"
+              accept="image/*"
+            />
+          </div>
+        </div>
+        <div class="col-9">
+          <div style="display: inline-block">
+            <h4>Features Images</h4>
+            <ng-container *ngFor="let multiple of multiples; let ind = index">
+              <div class="img-container" ng-repeat="file in imagefinaldata">
+                <img
+                  height="150px"
+                  width="150px"
+                  [src]="multiple"
+                  style="padding: 10px"
+                />
+                <i class="fa fa-remove close" (click)="removeImage(ind)"></i>
+              </div>
+            </ng-container>
+            <div>
+              <input
+                id="file-input"
+                type="file"
+                accept="image/*"
+                name="myfile"
+                (change)="onSelectFile($event)"
+                multiple="multiple"
+                style="margin-top: 30px"
+              />
+            </div>
+          </div>
+        </div>
       </div>
+
       <p></p>
       <button
         *ngIf="!isUpdateActive"
-        [disabled]="!currentFile || !ProductForm.valid"
+        [disabled]="!currentFile || !ProductForm.valid || !multiples.length"
         (click)="Save()"
         mat-raised-button
         color="accent"
