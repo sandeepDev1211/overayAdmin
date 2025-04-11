@@ -11,17 +11,28 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent {
-
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['orderId','ProductName','Name', 'Address', 'Contact No', 'Amount','Order Status','Action'];
-orderId: any;
-// Id: any;
+  statusList: any[] = [
+    'Pending',
+    'Processing',
+    'Shipped',
+    'Delivered',
+    'Cancelled',
+  ];
+  displayedColumns: string[] = [
+    'orderId',
+    'ProductName',
+    'Name',
+    'Address',
+    'Contact No',
+    'Amount',
+    'Order Status',
+    'Action',
+  ];
+  orderId: any;
+  // Id: any;
 
-
-
-  constructor(
-    private router: Router,
-    private orderService: OrderService) {}
+  constructor(private router: Router, private orderService: OrderService) {}
 
   ngOnInit(): void {
     this.getOrderDetails();
@@ -30,7 +41,7 @@ orderId: any;
     this.router.navigate(['/orders/add-order']);
   }
   getOrderDetails() {
-    this.orderService.getOrder().subscribe({
+    this.orderService.getOrders().subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);
       },
@@ -40,14 +51,15 @@ orderId: any;
     });
   }
 
-   markAsDelivered(orderId: any){
-   console.log(orderId);
-   this.orderService.getOrderById(orderId).subscribe(
-   (res)=>{
-    console.log(res);
-   },(error)=>{
-    console.log(error)
-   }
-   )
+  markAsDelivered(orderId: any) {
+    console.log(orderId);
+    this.orderService.getOrderById(orderId).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

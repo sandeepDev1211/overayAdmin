@@ -30,6 +30,23 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgConfirmModule } from 'ng-confirm-box';
 import { FormsModule } from '@angular/forms';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+
+const MY_DATE_FORMAT = {
+  parse: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will be parsed from Input
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will get displayed on the Input
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  }
+};
 
 @NgModule({
   declarations: [
@@ -63,13 +80,34 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MatSortModule,
     NgConfirmModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptor,
     multi:true
-  }],
+  }, 
+  { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, 
+    MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
+  { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }, 
+  {
+      provide: MAT_DATE_FORMATS, useValue: {
+          parse: {
+              dateInput: "DD-MM-YYYY",
+          },
+          display: {
+              dateInput: "DD-MM-YYYY",
+              monthYearLabel: "MMM YYYY",
+              dateA11yLabel: "LL",
+              monthYearA11yLabel: "MMMM YYYY",
+          },
+      }
+  }
+
+],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

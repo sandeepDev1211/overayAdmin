@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {OrderDetails } from './models/order.model';
+import { OrderDetails } from './models/order.model';
+import { AppConstants } from 'src/app/util/app-constant';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
-  constructor(private http: HttpClient) {
-  }
+  public url: string = AppConstants.BASE_URL;
+  constructor(private http: HttpClient) {}
 
-  getOrder() {
-    return this.http.get<any>(' http://localhost:3000/orders');
+  getOrders(filterParams = {}) {
+    return this.http.post<any>(`${this.url}/v1/admin/order/list`, filterParams);
   }
 
   postOrder(orders: any) {
@@ -21,5 +22,4 @@ export class OrderService {
   getOrderById(orderId: number) {
     return this.http.get('http://localhost:3000/orders/' + orderId);
   }
-
 }
