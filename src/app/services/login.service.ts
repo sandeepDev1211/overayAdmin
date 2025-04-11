@@ -10,7 +10,7 @@ export class LoginService {
   //   throw new Error('Method not implemented.');
   // }
 
-url='http://localhost:5000/v1/auth/login'
+url='https://www.shop.overay.in/v1/auth/login'
 
   isAdminLoggedIn = new Subject<boolean>();
 
