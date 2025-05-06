@@ -1,0 +1,67 @@
+<div class="analytics-container">
+    <h2>Order Analytics</h2>
+  
+    <div class="summary-cards">
+      <mat-card class="summary-card">
+        <mat-card-header>
+          <mat-card-title>Total Revenue</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>₹{{ summary.totalRevenue }}</p>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="summary-card">
+        <mat-card-header>
+          <mat-card-title>Total Orders</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ summary.totalOrders }}</p>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="summary-card">
+        <mat-card-header>
+          <mat-card-title>Average Order Value</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>₹{{ summary.avgOrderValue }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <div class="status-breakdown">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Status Breakdown</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngFor="let status of statusBreakdown">
+            <mat-card class="status-card">
+              <mat-card-content>
+                <p>{{ status._id }}: {{ status.count }} orders</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <div class="monthly-revenue">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Monthly Revenue</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngFor="let month of monthlyRevenue">
+            <mat-card class="month-card">
+              <mat-card-content>
+                <p>{{ month._id.month }}/{{ month._id.year }}: ₹{{ month.revenue }} ({{ month.orders }} orders)</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  

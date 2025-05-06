@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TableComponent } from './components/table/table.component';
+import { OrderAnalyticsComponent } from './components/order-analytics/order-analytics.component';  // <-- Import here
 import { AuthGuardGuard } from './guard/auth-guard.guard';
+import { BannerUploadComponent } from './components/banner-upload/banner-upload.component'; // <-- Import your component
 
 const routes: Routes = [
   { path: '', redirectTo: 'admin-login', pathMatch: 'full' },
@@ -15,7 +17,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./components/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
-        
       ),
     canActivate:[AuthGuardGuard]
   },
@@ -65,7 +66,18 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'table',component:TableComponent
+    path: 'table', component: TableComponent
+  },
+  // Add the route for Order Analytics
+  {
+    path: 'order-analytics',
+    component: OrderAnalyticsComponent,  // <-- Add this line
+    canActivate: [AuthGuardGuard] // Optional: Protect it with AuthGuard
+  },
+  {
+    path: 'banner',
+    component: BannerUploadComponent,  // <-- Use your component here
+    canActivate: [AuthGuardGuard] // Optional: Protect it with AuthGuard
   },
 ];
 

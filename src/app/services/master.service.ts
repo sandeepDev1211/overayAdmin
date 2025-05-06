@@ -11,7 +11,7 @@ export class MasterService {
   constructor(private http:HttpClient) { }
 
 getData():Observable<data[]>{
-  return this.http.get<data[]>("http://localhost:3000/data");
+  return this.http.get<data[]>("https://www.shop.overay.in/data");
 }
 
 }

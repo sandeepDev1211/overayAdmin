@@ -3,6 +3,8 @@
     <img src="./assets/logo.webp" alt="Company Logo" />
   </div>
   <mat-divider></mat-divider>
+  
+  <!-- Dashboard Section -->
   <mat-expansion-panel disabled hideToggle>
     <mat-expansion-panel-header>
       <a
@@ -15,6 +17,27 @@
     </mat-expansion-panel-header>
   </mat-expansion-panel>
 
+  <!-- Banner Section -->
+  <mat-expansion-panel [expanded]="isExpanded('banner')" hideToggle>
+    <mat-expansion-panel-header class="submenu">
+      <a
+        mat-list-item
+        class="{{ isActive('banner') }} second-level-list"
+        (click)="navigateToURL('banner')"
+      >
+        <mat-icon>image</mat-icon> Banner
+      </a>
+    </mat-expansion-panel-header>
+    <a
+      mat-list-item
+      class="{{ isActive('banner') }} second-level-list"
+      (click)="navigateToURL('banner')"
+    >
+      Banner
+    </a>
+  </mat-expansion-panel>
+
+  <!-- Products Section -->
   <mat-expansion-panel [expanded]="isExpanded('products')" hideToggle>
     <mat-expansion-panel-header class="submenu">
       <a
@@ -34,6 +57,7 @@
     </a>
   </mat-expansion-panel>
 
+  <!-- Categories Section -->
   <mat-expansion-panel [expanded]="isExpanded('categories')" hideToggle>
     <mat-expansion-panel-header class="submenu">
       <a
@@ -53,6 +77,7 @@
     </a>
   </mat-expansion-panel>
 
+  <!-- Coupons Section -->
   <mat-expansion-panel [expanded]="isExpanded('coupons')" hideToggle>
     <mat-expansion-panel-header class="submenu">
       <a
@@ -72,6 +97,7 @@
     </a>
   </mat-expansion-panel>
 
+  <!-- Orders Section -->
   <mat-expansion-panel [expanded]="isExpanded('orders')" hideToggle>
     <mat-expansion-panel-header class="submenu">
       <a
@@ -91,6 +117,27 @@
     </a>
   </mat-expansion-panel>
 
+  <!-- Order Analytics Section (New) -->
+  <mat-expansion-panel [expanded]="isExpanded('order-analytics')" hideToggle>
+    <mat-expansion-panel-header class="submenu">
+      <a
+        mat-list-item
+        class="{{ isActive('order-analytics') }} second-level-list"
+        (click)="navigateToURL('order-analytics')"
+      >
+        <mat-icon>bar_chart</mat-icon> Order Analytics
+      </a>
+    </mat-expansion-panel-header>
+    <a
+      mat-list-item
+      class="{{ isActive('order-analytics') }} second-level-list"
+      (click)="navigateToURL('order-analytics')"
+    >
+      Order Analytics
+    </a>
+  </mat-expansion-panel>
+
+  <!-- Users Section -->
   <mat-expansion-panel disabled hideToggle>
     <mat-expansion-panel-header>
       <a
@@ -103,6 +150,7 @@
     </mat-expansion-panel-header>
   </mat-expansion-panel>
 
+  <!-- Home Settings Section -->
   <mat-expansion-panel disabled hideToggle>
     <mat-expansion-panel-header>
       <a
@@ -115,6 +163,7 @@
     </mat-expansion-panel-header>
   </mat-expansion-panel>
 
+  <!-- Settings Section -->
   <mat-expansion-panel [expanded]="isExpanded('settings')" hideToggle>
     <mat-expansion-panel-header class="submenu">
       <a
@@ -134,6 +183,7 @@
     </a>
   </mat-expansion-panel>
 
+  <!-- Logout Section -->
   <mat-expansion-panel disabled hideToggle>
     <mat-expansion-panel-header>
       <a

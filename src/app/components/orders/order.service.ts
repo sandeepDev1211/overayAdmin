@@ -16,10 +16,10 @@ export class OrderService {
   }
 
   postOrder(orders: any) {
-    return this.http.post<any>(' http://localhost:3000/orders', orders);
+    return this.http.post<any>('https://www.shop.overay.in/orders', orders);
   }
 
   getOrderById(orderId: number) {
-    return this.http.get('http://localhost:3000/orders/' + orderId);
+    return this.http.get('https://www.shop.overay.in/orders/' + orderId);
   }
 }

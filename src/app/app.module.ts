@@ -35,6 +35,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { OrderAnalyticsComponent } from './components/order-analytics/order-analytics.component';
+import { BannerUploadComponent } from './components/banner-upload/banner-upload.component';
 
 const MY_DATE_FORMAT = {
   parse: {
@@ -56,6 +58,8 @@ const MY_DATE_FORMAT = {
     SidenavComponent,
     MessageDialogComponent,
     TableComponent,
+    OrderAnalyticsComponent,
+    BannerUploadComponent,
   ],
   imports: [
     BrowserModule,

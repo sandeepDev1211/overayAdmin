@@ -1,0 +1,48 @@
+<div class="banner-upload-container">
+  <h2>Upload Banner</h2>
+
+  <!-- File upload form -->
+  <div class="file-input-container">
+    <input
+      type="file"
+      (change)="onFileSelected($event)"
+      accept="image/*"
+    />
+  </div>
+
+  <!-- Upload button -->
+  <button (click)="uploadBanner()">Upload Banner</button>
+
+  <!-- Success message -->
+  <div *ngIf="uploadSuccess" class="alert alert-success">
+    Banner uploaded successfully!
+  </div>
+
+  <!-- Error message -->
+  <div *ngIf="uploadError" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- List of existing banners -->
+  <div *ngIf="banners.length > 0">
+    <h3>Existing Banners</h3>
+    <div class="banner-list">
+      <div *ngFor="let banner of banners" class="banner-item">
+        <div class="banner-image-container">
+          <img
+            [src]="'https://www.shop.overay.in/v1/file/' + (banner.image || banner.banner_image)"
+            alt="Banner Image"
+            class="banner-image"
+          />
+        </div>
+        <div class="banner-actions">
+          <button (click)="deleteBanner(banner._id)" class="delete-button">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="banners.length === 0" class="alert alert-info">
+    No banners available.
+  </div>
+</div>
