@@ -4,6 +4,7 @@ import { TableComponent } from './components/table/table.component';
 import { OrderAnalyticsComponent } from './components/order-analytics/order-analytics.component';  // <-- Import here
 import { AuthGuardGuard } from './guard/auth-guard.guard';
 import { BannerUploadComponent } from './components/banner-upload/banner-upload.component'; // <-- Import your component
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'admin-login', pathMatch: 'full' },
@@ -14,11 +15,14 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () =>
-      import('./components/dashboard/dashboard.module').then(
-        (m) => m.DashboardModule
-      ),
-    canActivate:[AuthGuardGuard]
+    component: OrderAnalyticsComponent,
+    canActivate: [AuthGuardGuard],
+    children: [
+      {
+        path: 'analytics',
+        component: OrderAnalyticsComponent
+      }
+    ]
   },
   {
     path: 'categories',
